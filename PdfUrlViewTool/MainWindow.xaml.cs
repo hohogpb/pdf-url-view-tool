@@ -21,11 +21,18 @@ namespace PdfUrlViewTool
 {
     public class PdfEntry : ViewModelBase
     {
-        private string pdfUrl;
-        public string PdfUrl
+        private string url;
+        public string Url
         {
-            get { return pdfUrl; }
-            set { Set(ref pdfUrl, value); }
+            get { return url; }
+            set { Set(ref url, value); }
+        }
+
+        private int index;
+        public int Index
+        {
+            get { return index; }
+            set { Set(ref index, value); }
         }
     }
 
@@ -52,16 +59,6 @@ namespace PdfUrlViewTool
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<string> pdfList;
-        public List<string> PdfList
-        {
-            get { return pdfList; }
-            set
-            {
-                pdfList = value;
-                RaisePropertyChanged("PdfList");
-            }
-        }
 
         public BindingList<PdfEntry> pdfEntries;
         public BindingList<PdfEntry> PdfEntries
@@ -86,7 +83,7 @@ namespace PdfUrlViewTool
         {
             try
             {
-                Uri uri = new Uri(e.AddedItems[0].ToString());
+                Uri uri = new Uri((e.AddedItems[0] as PdfEntry).Url);
 
                 using (var client = new WebClient())
                 {
@@ -114,7 +111,10 @@ namespace PdfUrlViewTool
             {
                 string txt = dlg.TxtBoxValue;
                 string[] lines = txt.Split('\n');
-                PdfList = lines.ToList();
+
+                var tl = lines.Select((v, idx) => new PdfEntry { Url = v, Index = idx + 1 }).ToList();
+
+                PdfEntries = new BindingList<PdfEntry>(tl);
             }
         }
     }

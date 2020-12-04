@@ -26,12 +26,30 @@
             </StackPanel>
 
             <ListBox Grid.Row="1"                
-                     ItemsSource="{Binding PdfList}" 
-                     SelectionChanged="ListBox_SelectionChanged"
+                     
             >
                 
             </ListBox>
 
+            <ListView Grid.Row="1" Margin="10" ItemsSource="{Binding PdfEntries}" 
+                     SelectionChanged="ListBox_SelectionChanged" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                                                       
+                            <CheckBox Grid.Column="0"/>
+                            <TextBlock Width="20" TextAlignment="Center" Grid.Column="1" Text="{Binding Index}" FontWeight="Bold" />
+                            <TextBlock Height="20" LineHeight="20" Grid.Column="2" Text="{Binding Url}" FontWeight="Bold" />
+                        </Grid>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch"/>
