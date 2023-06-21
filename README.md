@@ -1,21 +1,15 @@
 # PdfUrlViewTool
 
-#### 介绍
-如果你有一堆pdf url网址，想要快速浏览内容，可以使用本工具
+![1687341730325](image/README/1687341730325.png)
 
-#### 软件架构
-c# WPF
+#### a simple pdf urls viewer
 
+clone
 
-#### 安装教程
-clone，vs2017打开，编译，复制libmupdf.dll到bin目录，运行
+open sln with visual studio
 
+compile
 
-#### 使用说明
-..
-#### 参与贡献
-..
+find libmupdf.dll under packages, copy to debug/bin or release/bin
 
-
-#### 特技
-..
+run
